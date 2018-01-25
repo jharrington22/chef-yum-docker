@@ -1,6 +1,10 @@
+default['yum']['supported_platform_versions'] = [7, 2017, 2018]
+
 base_url = case node['platform']
            when 'fedora'
              "https://download.docker.com/linux/fedora/#{node['platform_version'].to_i}/x86_64"
+           when 'amazon'
+             "https://download.docker.com/linux/centos/7/x86_64"
            else
              "https://download.docker.com/linux/centos/#{node['platform_version'].to_i}/x86_64"
            end
@@ -8,6 +12,8 @@ base_url = case node['platform']
 gpg_key = case node['platform']
           when 'fedora'
             'https://download.docker.com/linux/fedora/gpg'
+          when 'amazon'
+            'https://download.docker.com/linux/centos/gpg'
           else
             'https://download.docker.com/linux/centos/gpg'
           end
